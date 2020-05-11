@@ -9,8 +9,14 @@ namespace Dev23
 {
     class Program
     {
-       
-            
+        public static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
 
         static void Main(string[] args)
         {
@@ -33,9 +39,10 @@ namespace Dev23
                         string guid = "";
                         sha = data.GetAttribute("sha256");
                         guid = data.GetAttribute("guid");
-                        string value = data.Value;
-                        byte[] bytevalue = Encoding.ASCII.GetBytes(value);
-                        byte[] byteshavalue = Encoding.ASCII.GetBytes(sha);
+                        string value = data.ReadElementContentAsString();
+                        //Console.WriteLine(value);
+                        byte[] bytevalue = StringToByteArray(value);
+                        byte[] byteshavalue = StringToByteArray(sha);
                         using (SHA256 mysha256 = SHA256.Create())
                         {
                             byte[] hasValue = mysha256.ComputeHash(bytevalue);
