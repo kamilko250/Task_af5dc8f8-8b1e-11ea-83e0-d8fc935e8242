@@ -30,8 +30,6 @@ namespace Dev23
                     {
                     if (data.Name == "data")
                         b++;
-                    if (b == 10)
-                        return;
 
                     if (data.HasAttributes)
                     {
@@ -47,12 +45,22 @@ namespace Dev23
                         {
                             byte[] hasValue = mysha256.ComputeHash(bytevalue);
                
-               
-                            if (byteshavalue.SequenceEqual(hasValue))
+                            if (!byteshavalue.SequenceEqual(hasValue))
                             {
                                 Console.WriteLine(guid);
                             }
-               
+                            //for (int i = 0; i < hasValue.Length; i++)
+                            //{
+                            //    Console.Write(hasValue[i]);
+                            //}
+                            //Console.WriteLine();
+                            //for (int i = 0; i < hasValue.Length; i++)
+                            //{
+                            //    Console.Write(byteshavalue[i]);
+                            //}
+                            //Console.WriteLine();
+                        if (b == 10)
+                            return;
                         }
 
                     }
